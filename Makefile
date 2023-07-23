@@ -1,8 +1,12 @@
 obj-m += icm20948.o
 
+SRC := $(shell pwd)
+
 all:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) modules
+
+modules_install:
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) modules_install
 
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) clean
