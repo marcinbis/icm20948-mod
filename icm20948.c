@@ -520,10 +520,12 @@ static int icm20948_read_raw(struct iio_dev *indio_dev,
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				return icm20948_read_raw_word(icm, ACCEL_XOUT_H, chan->channel2, val);
 			}
+			break;
 		case IIO_ANGL_VEL:
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				return icm20948_read_raw_word(icm, GYRO_XOUT_H, chan->channel2, val);
 			}
+			break;
 		case IIO_MAGN:
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				i = icm20948_read_raw_word(icm, EXT_SLV_SENS_DATA_00, chan->channel2, val);
@@ -533,26 +535,30 @@ static int icm20948_read_raw(struct iio_dev *indio_dev,
 				}
 				return i;
 			}
+			break;
 		case IIO_TEMP:
 			return icm20948_read_raw_word(icm, TEMP_OUT_H, -1, val);
+			break;
 		default:
 			break;
 		}
-
+	break;
 	case IIO_CHAN_INFO_CALIBBIAS:
 		switch (chan->type) {
 		case IIO_ACCEL:
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				return icm20948_read_raw_word(icm, XA_OFFS_H, chan->channel2, val);
 			}
+			break;
 		case IIO_ANGL_VEL:
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				return icm20948_read_raw_word(icm, XG_OFFS_USRH, chan->channel2, val);
 			}
+			break;
 		default:
 			break;
 		}
-
+	break;
 	case IIO_CHAN_INFO_SCALE:
 		switch (chan->type) {
 		case IIO_MAGN:
@@ -566,7 +572,7 @@ static int icm20948_read_raw(struct iio_dev *indio_dev,
 		default:
 			break;
 		}
-
+	break;
 	case IIO_CHAN_INFO_OFFSET:
 		switch (chan->type) {
 		case IIO_TEMP:
@@ -602,10 +608,12 @@ static int icm20948_write_raw_int(struct iio_dev *indio_dev,
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				return icm20948_write_raw_word(icm, XA_OFFS_H, chan->channel2, val);
 			}
+			break;
 		case IIO_ANGL_VEL:
 			if (chan->channel2 >= IIO_MOD_X && chan->channel2 <= IIO_MOD_Z) {
 				return icm20948_write_raw_word(icm, XG_OFFS_USRH, chan->channel2, val);
 			}
+			break;
 		default:
 			break;
 		}
